@@ -12,6 +12,7 @@
 
     $tanggal    = date("Y-m-d");
     $target     = $_GET['target'];
+    $msg = $_GET['error'];
 
 if (isset($_SESSION['username'])){
 ?>
@@ -43,9 +44,16 @@ if (isset($_SESSION['username'])){
 			</a>
 			<div class="sidebar-content">
 				<div class="sidebar-user">
-					<img src="<?= $base_url?>/assets/img/avatars/avatar.jpg" class="img-fluid rounded-circle mb-2" alt="Linda Miller" />
+                    <?php
+                    if($_SESSION['picture'] != ''){
+                        $picture = $_SESSION['picture'];
+                        $username = $_SESSION['username'];
+                        echo "<img src='$base_url/assets/img/avatars/$picture' class='img-fluid rounded-circle mb-2' alt='$username'/>";
+                    }
+                    ?>
+					
 					<div class="font-weight-bold"><?= $_SESSION['username'] ?></div>
-					<small>Front-end Developer</small>
+					<small><?= $_SESSION['email'] ?></small>
 				</div>
 
 				<ul class="sidebar-nav">
@@ -57,13 +65,13 @@ if (isset($_SESSION['username'])){
                             <i class="align-middle mr-2 fas fa-fw fa-home"></i> <span class="align-middle">Dashboard</span>
                         </a>
                     </li>
-					<li class="sidebar-item <?php if($target == 'users' || $target == 'add-user' || $target == 'partners' || $target == 'testimonials') {echo 'active';} ?>"">
+					<li class="sidebar-item <?php if($target == 'users' || $target == 'add-user' || $target == 'detail-user' || $target == 'edit-user' || $target == 'partners' || $target == 'add-partner' ||$target == 'detail-partner' || $target == 'add-package' || $target == 'package' || $target == 'testimonials') {echo 'active';} ?>"">
 						<a href="#pages" data-toggle="collapse" class="sidebar-link collapsed">
 							<i class="align-middle mr-2 fas fa-fw fa-file"></i> <span class="align-middle">Manajemen data</span>
 						</a>
 						<ul id="pages" class="sidebar-dropdown list-unstyled collapse" data-parent="#sidebar">
-							<li class="sidebar-item <?php if($target == 'users' || $target == 'add-user') {echo 'active';} ?>"><a class="sidebar-link" href="<?= $base_url; ?>/users">Users</a></li>
-                            <li class="sidebar-item <?php if($target == 'partners') {echo 'active';} ?>"><a class="sidebar-link" href="<?= $base_url; ?>/partners">Partners</a></li>
+							<li class="sidebar-item <?php if($target == 'users' || $target == 'detail-user' || $target == 'add-user' || $target == 'edit-user') {echo 'active';} ?>"><a class="sidebar-link" href="<?= $base_url; ?>/users">Users</a></li>
+                            <li class="sidebar-item <?php if($target == 'partners' || $target == 'detail-partner' || $target == 'add-partner' || $target == 'package' || $target == 'add-package') {echo 'active';} ?>"><a class="sidebar-link" href="<?= $base_url; ?>/partners">Partners</a></li>
                             <li class="sidebar-item <?php if($target == 'testimonials') {echo 'active';} ?>"><a class="sidebar-link" href="<?= $base_url; ?>/testimonials">Testimonials</a></li>
 						</ul>
 					</li>
@@ -96,19 +104,49 @@ if (isset($_SESSION['username'])){
             <main class="content">
             <?php
                 if($target == 'dashboard' or $target == ''){
-                    include('dashboard/dashboard.php'); 
+                    include('views/dashboard/dashboard.php'); 
                 }
+                // route user
                 else if($target == 'users'){
-                    include('data/users.php'); 
+                    include('views/user/users.php'); 
                 }
                 else if($target == 'add-user'){
-                    include('data/add_user.php'); 
+                    include('views/user/create_user.php'); 
+                }
+                else if($target == 'detail-user'){
+                    include('views/user/detail_user.php'); 
+                }
+                else if($target == 'edit-user'){
+                    include('views/user/edit_user.php'); 
+                }
+                else if($target == 'delete-user'){
+                    include('views/user/delete_user.php'); 
+                }
+                // route partner
+                else if($target == 'add-partner'){
+                    include('views/partner/create_partner.php'); 
+                }
+                else if($target == 'detail-partner'){
+                    include('views/partner/detail_partner.php'); 
+                }
+                else if($target == 'edit-partner'){
+                    include('views/partner/edit_partner.php'); 
+                }
+                else if($target == 'delete-partner'){
+                    include('views/partner/delete_partner.php'); 
+                }
+                // route package
+                else if($target == 'add-package'){
+                    include('views/package/create_package.php'); 
+                }
+                else if($target == 'package'){
+                    include('views/package/packages.php'); 
                 }
                 else if($target == 'partners'){
-                    include('data/partner_store.php'); 
+                    include('views/partner/partners.php'); 
                 }
                 else if($target == 'testimonials'){
-                    include('data/testimonials.php'); 
+                    include('views/testimoni/testimonials.php'); 
                 }
             
 }
@@ -159,13 +197,32 @@ else {
 	</svg>
 
 	<script src="<?= $base_url?>/assets/js/app.js"></script>
+    <script src="<?= $base_url?>/assets/js/sweetalert2.all.min.js"></script>
     <script>
 		$(function() {
 			// Datatables basic
 			$('#datatables-basic').DataTable({
 				responsive: true
 			});
-			
+            $('a#delete').on('click', function(e){
+                e.preventDefault()
+                let href = $(this).attr('href')
+                Swal.fire({
+                    title: 'Apakah anda ingin menghapus?',
+                    text: 'Data akan dihapus permanen',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        location.href = href
+                        // document.getElementById('deleteForm').action = 'test'
+                        // document.getElementById('deleteForm').submit()
+                    }
+                })
+            })
 		});
 	</script>
 </body>
