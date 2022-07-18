@@ -1,5 +1,4 @@
-﻿<?php
-include('../inc/connect.php');
+﻿<?php include('../inc/connect.php');
 error_reporting(E_ALL ^ E_NOTICE);
 $msg = $_GET['msg'];
 ?>
@@ -13,7 +12,7 @@ $msg = $_GET['msg'];
 	<meta name="author" content="Bootlab">
 
 	<title>YourWo &amp; Sign up</title>
-    <link href="<?= $base_url?>/assets/css/modern.css" rel="stylesheet">
+    <link href="<?= $base_url?>/assets/backend/css/modern.css" rel="stylesheet">
 
 </head>
 <!-- SET YOUR THEME -->
@@ -52,14 +51,14 @@ $msg = $_GET['msg'];
                                     }
                                 ?>
 								<div class="m-sm-4">
-									<form action="../login/action_register.php" method="POST">
-                                        <div class="form-group">
-											<label>Full name</label>
-											<input class="form-control form-control-lg" type="text" name="name" placeholder="Enter your fullname" />
-										</div>
+									<form action="<?= $base_url ?>/login/action_register.php" method="POST">
                                         <div class="form-group">
 											<label>Username</label>
 											<input class="form-control form-control-lg" type="text" name="username" placeholder="Enter your username" />
+										</div>
+                                        <div class="form-group">
+											<label>Email</label>
+											<input class="form-control form-control-lg" type="email" name="email" placeholder="Enter your email" />
 										</div>
 										<div class="form-group">
 											<label>Password</label>
@@ -67,7 +66,7 @@ $msg = $_GET['msg'];
 										</div>
 										<div class="text-center mt-3">
                                             <input type="submit" name="register" class="btn btn-lg btn-primary btn-block mb-2" value="Register">
-                                            <a href="<?= $base_url?>/login/login_2.php">Already have an account? Log in</a>
+                                            <a href="<?= $base_url?>/login/login.php">Already have an account? Log in</a>
 										</div>
 									</form>
 								</div>
@@ -89,7 +88,7 @@ $msg = $_GET['msg'];
 			</symbol>
 		</defs>
 	</svg>
-	<script src="<?= $base_url?>/assets/js/app.js"></script>
+	<script src="<?= $base_url?>/assets/backend/js/app.js"></script>
 
 </body>
 </html>

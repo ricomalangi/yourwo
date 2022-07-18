@@ -1,0 +1,20 @@
+Options -Indexes
+RewriteEngine On
+RewriteRule ^([^/.]+)/?$ index.php?target=$1 [L]
+RewriteRule ^([^/.]+)/message/([^/.]+)/?$ index.php?target=$1&msg=$2 [L]
+
+#  route users
+RewriteRule ^users/([0-9a-zA-Z_-]+)/([^/.]+)/message/([^/.]+) index.php?target=$1&id=$2&msg=$3 [L]
+RewriteRule ^users/([0-9a-zA-Z_-]+)/message/([^/.]+) index.php?target=$1&msg=$2 [L]
+RewriteRule ^users/([0-9a-zA-Z_-]+)/([^/.]+) index.php?target=$1&id=$2 [L]
+RewriteRule ^users/([0-9a-zA-Z_-]+) index.php?target=$1 [L]
+
+# route partner
+RewriteRule ^partners/([0-9a-zA-Z_-]+)/([^/.]+)/message/([^/.]+) index.php?target=$1&id=$2&msg=$3 [L]
+RewriteRule ^partners/([0-9a-zA-Z_-]+)/message/([^/.]+) index.php?target=$1&msg=$2 [L]
+RewriteRule ^partners/([0-9a-zA-Z_-]+)/([^/.]+)/?$ index.php?target=$1&id=$2 [L]
+RewriteRule ^partners/([0-9a-zA-Z_-]+) index.php?target=$1 [L]
+
+RewriteRule ^([^/.]+)/delete/([^/.]+)/?$ index.php?target=$1&id=$2 [L]
+
+

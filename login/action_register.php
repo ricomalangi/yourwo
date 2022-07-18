@@ -1,23 +1,21 @@
 <?php
 include ('../inc/connect.php');
-
-
 $username = $_POST['username'];
-$name = $_POST['name'];
+$email = $_POST['email'];
 $password = md5(trim($_POST['password']));
 
 //get username from database
 if(isset($_POST['register'])){
-    if($username != '' && $name != '' && $password != ''){
-        $sql = "INSERT INTO table_user (username, password, name) VALUES ('$username', '$password', '$name')";
+    if($username != '' && $email != '' && $password != ''){
+        $sql = "INSERT INTO table_user (username, email, password, role) VALUES ('$username', '$email', '$password', 'customer')";
         $result = mysqli_query($connect,$sql) or die(mysqli_error($connect));
         if($result){
-            header("Location: login_2.php?msg=success");
+            header("Location: $base_url/login/login.php?msg=success");
         } else{
-            header("Location: login_2.php?msg=error");
+            header("Location: $base_url/login/login.php?msg=error");
         }
     } else{
-        header("Location: sign-up.php?msg=error_create");
+        header("Location: $base_url/login/sign-up.php?msg=error_create");
     }
 }
 

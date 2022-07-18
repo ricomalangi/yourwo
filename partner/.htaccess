@@ -1,0 +1,13 @@
+Options -Indexes
+RewriteEngine On
+RewriteRule ^([^/.]+)/?$ index.php?target=$1 [L]
+RewriteRule ^([^/.]+)/message/([^/.]+)/?$ index.php?target=$1&msg=$2 [L]
+
+RewriteRule ^packages/([0-9a-zA-Z_-]+)/([^/.]+)/message/([^/.]+) index.php?target=$1&id=$2&msg=$3 [L]
+RewriteRule ^packages/([0-9a-zA-Z_-]+)/message/([^/.]+) index.php?target=$1&msg=$2 [L]
+RewriteRule ^packages/([0-9a-zA-Z_-]+)/([^/.]+)/?$ index.php?target=$1&id=$2 [L]
+RewriteRule ^packages/([0-9a-zA-Z_-]+) index.php?target=$1 [L]
+
+RewriteRule ^([^/.]+)/delete/([^/.]+)/?$ index.php?target=$1&id=$2 [L]
+
+

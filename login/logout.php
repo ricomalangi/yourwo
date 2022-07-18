@@ -1,5 +1,6 @@
 <?php
+include('../inc/connect.php');
 session_start();
 unset($_SESSION['username']); //hapus session
-header("location:../index.php");
+header("location: $base_url/login/login.php");
 
