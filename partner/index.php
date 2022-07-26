@@ -11,8 +11,10 @@
     $tanggal = date("Y-m-d");
     $target = $_GET['target'];
     $msg = $_GET['error'];
-
-if (isset($_SESSION['username']) && $_SESSION['role'] == 'partner'){
+    if(!isset($_SESSION['username'])){
+        header("location: $base_url/login");
+    }
+if ($_SESSION['role'] == 'partner'){
 ?>
 <head>
 	<meta charset="utf-8">
@@ -24,6 +26,7 @@ if (isset($_SESSION['username']) && $_SESSION['role'] == 'partner'){
 	<title>yourweo - wedding orginizer</title>
 
 	<link href="<?= $base_url?>/assets/backend/css/modern.css" rel="stylesheet">
+    <script src="<?= $base_url?>/assets/backend/js/app.js"></script>
 
 </head>
 
@@ -131,8 +134,10 @@ if (isset($_SESSION['username']) && $_SESSION['role'] == 'partner'){
                     include('views/user/users.php'); 
                 }
 }
-else {
-    echo'<script language="javascript"> location.href ="'.$base_url.'/login/login.php"; </script>';
+else if($_SESSION['role'] == 'admin'){
+    echo'<script language="javascript"> location.href ="'.$base_url.'/admin/"; </script>';
+} else if($_SESSION['role'] == 'customer'){
+    echo'<script language="javascript"> location.href ="'.$base_url.'"; </script>';
 }
             ?>
             </main>
@@ -176,7 +181,6 @@ else {
 		</defs>
 	</svg>
 
-	<script src="<?= $base_url?>/assets/backend/js/app.js"></script>
     <script src="<?= $base_url?>/assets/backend/js/sweetalert2.all.min.js"></script>
     <script>
         $(document).ready(function(){

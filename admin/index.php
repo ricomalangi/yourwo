@@ -13,7 +13,12 @@
     $target = $_GET['target'];
     $msg = $_GET['error'];
 
-if (isset($_SESSION['username']) && $_SESSION['role'] == 'admin'){
+    if(!isset($_SESSION['username'])){
+        header("location: $base_url/login");
+    }
+
+
+if ($_SESSION['role'] == 'admin'){
 ?>
 <head>
 	<meta charset="utf-8">
@@ -25,7 +30,8 @@ if (isset($_SESSION['username']) && $_SESSION['role'] == 'admin'){
 	<title>yourweo - wedding orginizer</title>
 
 	<link href="<?= $base_url?>/assets/backend/css/modern.css" rel="stylesheet">
-
+    <link href="<?= $base_url?>/assets/backend/css/mystyle.css" rel="stylesheet">
+    <script src="<?= $base_url?>/assets/backend/js/app.js"></script>
 </head>
 
 <body>
@@ -71,7 +77,7 @@ if (isset($_SESSION['username']) && $_SESSION['role'] == 'admin'){
 						<ul id="pages" class="sidebar-dropdown list-unstyled collapse" data-parent="#sidebar">
 							<li class="sidebar-item <?php if($target == 'users' || $target == 'detail-user' || $target == 'add-user' || $target == 'edit-user') {echo 'active';} ?>"><a class="sidebar-link" href="<?= $base_url; ?>/admin/users">Users</a></li>
                             <li class="sidebar-item <?php if($target == 'partners' || $target == 'edit-partner' || $target == 'detail-partner' || $target == 'add-partner' || $target == 'package' || $target == 'add-package' || $target == 'edit-package' || $target == 'detail-package') {echo 'active';} ?>"><a class="sidebar-link" href="<?= $base_url; ?>/admin/partners">Partners</a></li>
-                            <li class="sidebar-item <?php if($target == 'testimonials') {echo 'active';} ?>"><a class="sidebar-link" href="<?= $base_url; ?>/admin/testimonials">Testimonials</a></li>
+                            <!-- <li class="sidebar-item <?php if($target == 'testimonials') {echo 'active';} ?>"><a class="sidebar-link" href="<?= $base_url; ?>/admin/testimonials">Testimonials</a></li> -->
 						</ul>
 					</li>
 
@@ -159,7 +165,7 @@ if (isset($_SESSION['username']) && $_SESSION['role'] == 'admin'){
                 }            
 }
 else {
-    echo'<script language="javascript"> location.href ="'.$base_url.'/login/login.php"; </script>';
+    echo'<script language="javascript"> location.href ="'.$base_url.'/admin/views/error/forbidden.php/"; </script>';
 }
             ?>
             </main>
@@ -203,7 +209,6 @@ else {
 		</defs>
 	</svg>
 
-	<script src="<?= $base_url?>/assets/backend/js/app.js"></script>
     <script src="<?= $base_url?>/assets/backend/js/sweetalert2.all.min.js"></script>
     <script>
         $(document).ready(function(){

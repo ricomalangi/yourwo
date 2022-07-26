@@ -65,6 +65,14 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update'])){
     $username = $_POST['username'];
     $email = $_POST['email'];
     $role = $_POST['role'];
+    if($role == 'partner'){
+        $cekAvailablePartner = "SELECT id_user FROM table_partner WHERE id_user = $id_user";
+        $result_cek = mysqli_query($connect, $cekAvailablePartner);
+        if(!$result_cek->num_rows){
+            $sql_partner = "INSERT INTO table_partner (id_user, picture, picture_project) VALUES ($id_user, '','')";
+            $result_partner = mysqli_query($connect,$sql_partner);
+        } 
+    }
     $sql = "UPDATE table_user SET username = '$username', email = '$email', role = '$role'";
     
     if($_POST['password'] != ''){

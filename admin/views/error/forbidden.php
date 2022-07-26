@@ -1,4 +1,4 @@
-<?php include('../../inc/connect.php'); ?>
+<?php  include($_SERVER['DOCUMENT_ROOT'] . '/inc/connect.php'); ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -7,7 +7,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<title>Forbidden - 403</title>
-	<link href="<?= $base_url?>/assets/css/modern.css" rel="stylesheet">
+	<link href="<?= $base_url?>/assets/backend/css/modern.css" rel="stylesheet">
 
 </head>
 <!-- SET YOUR THEME -->
@@ -28,7 +28,7 @@
 							<p class="h1">Forbidden.</p>
 							<p class="h2 font-weight-normal mt-3 mb-4">you are not allowed to enter here
 							</p>
-							<a href="<?= $base_url ?>/dashboard" class="btn btn-primary btn-lg">Return to website</a>
+							<a href="<?= $base_url ?>" class="btn btn-primary btn-lg">Return to website</a>
 						</div>
 
 					</div>
@@ -46,7 +46,7 @@
 			</symbol>
 		</defs>
 	</svg>
-	<script src="<?= $base_url?>/assets/js/app.js"></script>
+	<script src="<?= $base_url?>/assets/backend/js/app.js"></script>
 
 </body>
 

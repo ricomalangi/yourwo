@@ -51,7 +51,7 @@ RIGHT JOIN table_user tu ON  tp.id_user = tu.id_user WHERE tp.id_partner is NULL
                         }
                     ?>
                    
-                    <form method="POST" enctype="multipart/form-data" action="<?= $base_url ?>/admin/actions/action_partner.php">
+                    <form method="POST" enctype="multipart/form-data" action="<?= $base_url ?>/admin/actions/action_partner.php" id="validation-form">
                         <div class="form-group">
                             <label class="form-label">User</label>
                             <select name="id_user" class="form-control">
@@ -82,12 +82,39 @@ RIGHT JOIN table_user tu ON  tp.id_user = tu.id_user WHERE tp.id_partner is NULL
                             </select>
                         </div>
                         <div class="form-group">
+                            <label class="form-label">No. Hp</label>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">+62</span>
+                                </div>
+                                <input type="text" name="no_hp" class="form-control" placeholder="81234xxxx">
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label class="form-label">Tentang toko</label>
                             <textarea name="tentang_toko" rows="6" class="form-control"></textarea>
                         </div>
                         <div class="form-group">
-                            <label class="form-label w-100">Foto profile toko</label>
-                            <input type="file" name="picture">
+                            <label class="form-label w-100" for="choose-thumbnail">Foto profile toko</label>
+                            <input type="file" name="picture" id="choose-thumbnail">
+                            <div id="thumbnail-preview" class="img-preview"></div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-4">
+                                <label class="form-label w-100" for="picture_portfolio_1">Foto portfolio 1</label>
+                                <input type="file" name="picture_portfolio_1" id="picture_portfolio_1">
+                                <div id="preview-portfolio-1" class="img-preview"></div>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label w-100" for="picture_portfolio_2">Foto portfolio 2</label>
+                                <input type="file" name="picture_portfolio_2" id="picture_portfolio_2">
+                                <div id="preview-portfolio-2" class="img-preview"></div>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label w-100" for="picture_portfolio_3">Foto portfolio 3</label>
+                                <input type="file" name="picture_portfolio_3" id="picture_portfolio_3">
+                                <div id="preview-portfolio-3" class="img-preview"></div>
+                            </div>
                         </div>
                         <a href="<?= $base_url ?>/admin/partners" class="btn btn-lg btn-secondary mr-2">kembali</a>
                         <input type="submit" name="create" value="create" class="btn btn-lg btn-primary">
@@ -97,3 +124,115 @@ RIGHT JOIN table_user tu ON  tp.id_user = tu.id_user WHERE tp.id_partner is NULL
         </div>
     </div>
 </div>
+<script>
+    $("input[name=\"validation-bs-tagsinput\"]").on("itemAdded itemRemoved", function() {
+        $(this).valid();
+    });
+    $("#validation-form").validate({
+        rules: {
+            "id_user": {
+                required: true,
+            },
+            "nama_toko": {
+                required: true,
+            },
+            "lokasi": {
+                required: true,
+            },
+            "no_hp": {
+                required: true,
+                number: true,
+                minlength: 10,
+                maxlength: 12
+            },
+            "tentang_toko": {
+                required: true
+            },
+            "picture": {
+                required: true,
+                extension: "jpg|jpeg|png",
+                messages: {
+                    extension: "extension allowed are jpg, jpeg, png"
+                }
+            },
+            "picture_portfolio_1": {
+                required: true,
+                extension: "jpg|jpeg|png",
+                messages: {
+                    extension: "extension allowed are jpg, jpeg, png"
+                }
+            },
+            "picture_portfolio_2": {
+                required: true,
+                extension: "jpg|jpeg|png",
+                messages: {
+                    extension: "extension allowed are jpg, jpeg, png"
+                }
+            },
+            "picture_portfolio_3": {
+                required: true,
+                extension: "jpg|jpeg|png",
+                messages: {
+                    extension: "extension allowed are jpg, jpeg, png"
+                }
+            }
+        },
+        errorPlacement: function errorPlacement(error, element) {
+            var $parent = $(element).parents(".form-group");
+            // Do not duplicate errors
+            if ($parent.find(".jquery-validation-error").length) {
+                return;
+            }
+            $parent.append(
+                error.addClass("jquery-validation-error small form-text invalid-feedback")
+            );
+        },
+        highlight: function(element) {
+            var $el = $(element);
+            var $parent = $el.parents(".form-group");
+            $el.addClass("is-invalid");
+            // Select2 and Tagsinput
+            if ($el.hasClass("select2-hidden-accessible") || $el.attr("data-role") === "tagsinput") {
+                $el.parent().addClass("is-invalid");
+            }
+        },
+        unhighlight: function(element) {
+            $(element).parents(".form-group").find(".is-invalid").removeClass("is-invalid");
+        }
+    });
+    
+</script>
+<script>
+    const chooseFileThumbnail = document.getElementById("choose-thumbnail");
+    const chooseFilePicture1 = document.getElementById("picture_portfolio_1");
+    const chooseFilePicture2 = document.getElementById("picture_portfolio_2");
+    const chooseFilePicture3 = document.getElementById("picture_portfolio_3");
+
+    const thumbnail = document.getElementById("thumbnail-preview");
+    const picture1 = document.getElementById("preview-portfolio-1");
+    const picture2 = document.getElementById("preview-portfolio-2");
+    const picture3 = document.getElementById("preview-portfolio-3");
+
+    chooseFileThumbnail.addEventListener("change", function () {
+        getImgData(chooseFileThumbnail, thumbnail);
+    });
+    chooseFilePicture1.addEventListener("change", function () {
+        getImgData(chooseFilePicture1, picture1);
+    });
+    chooseFilePicture2.addEventListener("change", function () {
+        getImgData(chooseFilePicture2, picture2);
+    });
+    chooseFilePicture3.addEventListener("change", function () {
+        getImgData(chooseFilePicture3, picture3);
+    });
+    function getImgData(fileParam, tagHtml) {
+        const files = fileParam.files[0];
+        if (files) {
+            const fileReader = new FileReader();
+            fileReader.readAsDataURL(files);
+            fileReader.addEventListener("load", function () {
+                tagHtml.innerHTML = '<img src="' + this.result + '" />';
+            });    
+        }
+    }
+</script>

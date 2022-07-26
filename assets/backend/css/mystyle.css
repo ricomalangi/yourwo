@@ -1,0 +1,11 @@
+.img-preview {
+    margin-top: 20px;
+    display: block; 
+    width: 155px;   
+}
+
+.img-preview img {  
+    width: 100%;
+    height: auto; 
+
+}

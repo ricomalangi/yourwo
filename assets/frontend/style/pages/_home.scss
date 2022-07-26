@@ -1,0 +1,268 @@
+.page-home {
+    margin-top: 150px;
+    .hero-content {
+        margin-top: 30px;
+        @include media-breakpoint-down(md){
+            margin-top: -50px;
+        }
+        h5 {
+            font-weight: 600;
+            font-size: 30px;
+            line-height: 48px;
+            color: #0ABAB5;
+            @include media-breakpoint-down(md){
+                font-size: 26px;
+                line-height: 38px;
+            }
+        }
+        p {
+            margin-top: 15px;
+            font-weight: 500;
+            font-size: 18px;
+            line-height: 30px;
+            @include media-breakpoint-down(md){
+                font-size: 16px;
+                line-height: 30px;
+            }
+        }
+        .btn-hero {
+            margin-top: 30px;
+            background-color: #0ABAB5;
+            color: white;
+            width: 250px;
+            height: 68px;
+            padding-top: 20px;
+            font-weight: 500;
+            font-size: 18px;
+            box-shadow: 0px 8px 15px rgba(10, 186, 181, 0.3);
+            border-radius: 12px;
+            @include media-breakpoint-down(md){
+                width: 150px;
+                height: 48px;
+                padding-top: 12px;
+                font-size: 15px;
+                margin-left: auto;
+                margin-right: auto;
+                display: block;
+                margin-bottom: 70px;
+            }
+        }
+    }   
+    .hero-image{
+        width: 520px;
+        img{
+            width: 100%;
+            @include media-breakpoint-down(md) {
+              
+            }
+        }
+        @include media-breakpoint-down(md) {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 250px;
+        }
+    }
+}
+.page-counter{
+    margin-top: 150px;
+    text-align: center;
+    background-color: #0ABAB5;
+    color: white;
+    width: 100%;
+    height: 120px;
+    padding-top: 30px;
+    @include media-breakpoint-down(md) {
+        height: auto;
+    }
+    .total{
+        font-weight: 600;
+    }
+    .counter-text{
+        font-weight: 500;
+        margin-top: -15px;
+        @include media-breakpoint-down(md) {
+            font-weight: 400;
+            margin-bottom: 28px;
+        }
+    }     
+}
+.page-best-choices{
+    margin-top: 70px;
+    h5{
+        margin-bottom: 20px;
+        font-weight: 600;
+    }
+    .component-wo {
+        
+        &:hover {
+          text-decoration: none;
+        }
+      
+        .wo-thumbnail {
+          width: 100%;
+          height: 270px;
+      
+          border-radius: 8px;
+      
+          overflow: hidden;
+          position: relative;
+          z-index: 1;
+          &:hover,
+          &:focus {
+            .wo-image {
+              transform: scale(1.1);
+            }
+          }
+        
+          .wo-image {
+            width: 100%;
+            height: 100%;
+      
+            background-color: #ddd;
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+      
+            transition: all 0.3s ease;
+          
+          }
+        }
+      
+        .wo-text {
+            color: #0c0d36;
+            margin-top: 12px;
+            font-weight: normal;
+            font-size: 18px;
+            @include media-breakpoint-down(md) {
+                font-size: 12px;
+            }
+            img{
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+                @include media-breakpoint-down(md) {
+                    width: 20px;
+                    height: 20px;
+                    margin-right: 4px;
+                }
+            }
+        }
+      
+    }
+}
+.location-choices{
+    margin-top: 70px;
+    h5{
+        margin-bottom: 20px;
+        font-weight: 600;
+    }
+    .component-wo {
+        margin-bottom: 20px;
+      
+        &:hover {
+          text-decoration: none;
+        }
+      
+        .wo-thumbnail {
+          width: 100%;
+          height: 270px;
+      
+          border-radius: 8px;
+      
+          overflow: hidden;
+          position: relative;
+          z-index: 1;
+         
+        
+          .wo-image {
+            width: 100%;
+            height: 100%;
+      
+            background-color: #ddd;
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+      
+            transition: all 0.3s ease;
+            &:hover,
+            &:focus {
+              .wo-image {
+                transform: scale(1.1);
+              }
+            }
+          
+          }
+          .wo-thumbnail-extras{
+            width: 120px;
+            height: 100px;
+            text-align: center;
+          }
+        }
+      
+        .wo-text {
+          color: #0c0d36;
+          margin-top: 12px;
+          font-weight: normal;
+          font-size: 18px;
+          img{
+              border-radius: 50%;
+          }
+        }
+      
+    }
+}
+.page-find-more{
+    margin-top: 46px;
+    .btn-find-more{
+        border: 1px solid #0ABAB5;
+        border-radius: 12px;
+        width: 150px;
+        height: 60px;
+        padding-top: 16px;
+        font-weight: 500;
+        &:hover{
+            background-color: #0ABAB5;
+            color: white;
+        }
+    }
+}
+.page-testimoni{
+    margin-top: 120px;
+   
+    .testimoni-image{
+        @include media-breakpoint-down(sm) {
+            text-align: center;
+        }
+        img{
+            width: 460px;
+            @include media-breakpoint-down(md) {
+                width: 250px;
+                text-align: center;
+            }
+        }
+    }
+    .testimoni-content{
+        margin-top: 180px;
+        @include media-breakpoint-down(md) {
+            margin-top: 40px;
+        }
+        h5{
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        img{
+            width: 120px;
+        }
+        .testimoni-message{
+            font-weight: 400;
+            font-size: 22px;
+            @include media-breakpoint-down(md) {
+                font-size: 16px;
+            }
+        }
+        .testimoni-people{
+            color: #B0B0B0;
+        }
+    }
+}

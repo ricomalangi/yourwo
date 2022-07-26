@@ -37,9 +37,5 @@ if(mysqli_num_rows($sql_login) == 1){
     }
 } 
 else{
-    header("Location: $base_url/login/login.php?msg=error");
+    header("Location: $base_url/login/message/error");
 }
-
-
-// <!-- <script language ="javascript">location.href ="login.php?msg=error"; </script> -->
-// <!-- <script language ="javascript">location.href ="../admin/index.php"; </script> -->
